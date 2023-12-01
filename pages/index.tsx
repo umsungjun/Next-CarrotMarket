@@ -41,7 +41,36 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="bg-white p-6 rounded-3xl shadow-xl "></div>
+      <div className="bg-white p-6 rounded-3xl shadow-xl ">
+        <div className="flex jus">
+          <span>⬅️</span>
+          <div>
+            <span>★ 4.9</span>
+            <span>♥</span>
+          </div>
+          <div />
+          <div>
+            <span>Swoon Longue</span>
+            <span>Chair</span>
+            <div>
+              <div>
+                <input type="radio" />
+                <input type="radio" />
+                <input type="radio" />
+              </div>
+              <div>
+                <button>-</button>
+                <span>1</span>
+                <button>+</button>
+              </div>
+            </div>
+            <div>
+              <span>$450</span>
+              <button>Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="bg-white p-6 rounded-3xl shadow-xl "></div>
     </div>
   );
