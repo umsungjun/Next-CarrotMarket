@@ -41,31 +41,39 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="bg-white p-6 rounded-3xl shadow-xl ">
-        <div className="flex jus">
-          <span>⬅️</span>
-          <div>
-            <span>★ 4.9</span>
-            <span>♥</span>
+      <div className="flex flex-col bg-white p-6 rounded-3xl shadow-xl ">
+        <div className="flex flex-col mb-5 justify-between items-center ">
+          <div className="flex w-full justify-between items-center">
+            <span>⬅️</span>
+            <div className="space-x-3 ">
+              <span>★ 4.9</span>
+              <span className="shadow-xl p-2 rounded-md">♥</span>
+            </div>
           </div>
-          <div />
-          <div>
-            <span>Swoon Longue</span>
-            <span>Chair</span>
-            <div>
+          <div className="bg-red-400 w-full h-80 mt-2" />
+          <div className="w-full">
+            <div className="flex flex-col my-2">
+              <span className="font-medium ">Swoon Longue</span>
+              <span className="text-xs text-gray-500">Chair</span>
+            </div>
+            <div className="w-full flex justify-between">
               <div>
                 <input type="radio" />
                 <input type="radio" />
                 <input type="radio" />
               </div>
-              <div>
-                <button>-</button>
+              <div className="flex items-center gap-2">
+                <button className=" bg-blue-200 flex justify-center items-center aspect-square w-8 font-medium  text-gray-400 rounded-lg">
+                  -
+                </button>
                 <span>1</span>
-                <button>+</button>
+                <button className=" bg-blue-200 flex justify-center items-center aspect-square w-8 font-medium  text-gray-400 rounded-lg">
+                  +
+                </button>
               </div>
             </div>
-            <div>
-              <span>$450</span>
+            <div className="w-full flex gap-2">
+              <span className="font-medium">$450</span>
               <button>Add to Cart</button>
             </div>
           </div>
