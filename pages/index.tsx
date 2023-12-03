@@ -15,8 +15,10 @@ export default function Home() {
           <span>Total</span>
           <span className="font-semibold">$10</span>
         </div>
-        <div className="mt-5 bg-blue-500 text-white p-3 text-center rounded-xl w-1/2 mx-auto">
-          Checkout
+        <div className="flex justify-center">
+          <button className="mt-5  bg-blue-500 hover:bg-teal-500 text-white p-3 text-center rounded-xl w-1/2 mx-auto hover:text-black active:bg-yellow-500">
+            Checkout
+          </button>
         </div>
       </div>
       <div className="bg-white overflow-hidden rounded-3xl shadow-xl ">
@@ -57,10 +59,10 @@ export default function Home() {
               <span className="text-xs text-gray-500">Chair</span>
             </div>
             <div className="w-full flex justify-between">
-              <div>
-                <input type="radio" />
-                <input type="radio" />
-                <input type="radio" />
+              <div className="space-x-2">
+                <button className="w-5 h-5 rounded-full bg-yellow-500" />
+                <button className="w-5 h-5 rounded-full bg-indigo-500" />
+                <button className="w-5 h-5 rounded-full bg-teal-500" />
               </div>
               <div className="flex items-center gap-2">
                 <button className=" bg-blue-200 flex justify-center items-center aspect-square w-8 font-medium  text-gray-400 rounded-lg">
