@@ -60,7 +60,7 @@ export default function Home() {
             </div>
             <div className="w-full flex justify-between">
               <div className="space-x-2">
-                <button className="w-5 h-5 rounded-full bg-yellow-500" />
+                <button className="w-5 h-5 rounded-full bg-yellow-500 ring-2 ring-offset-2" />
                 <button className="w-5 h-5 rounded-full bg-indigo-500" />
                 <button className="w-5 h-5 rounded-full bg-teal-500" />
               </div>
