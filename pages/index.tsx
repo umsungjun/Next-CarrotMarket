@@ -1,6 +1,6 @@
 export default function Home() {
   return (
-    <div className="bg-slate-400 py-20 px-10 grid gap-10">
+    <div className="bg-slate-400 h-full min-h-screen py-20 px-10 grid gap-10 lg:grid-cols-2 xl:grid-cols-3 xl:place-content-center ">
       <div className="bg-white sm:bg-red-400 md:bg-teal-400 lg:bg-indigo-400 xl:bg-yellow-400 2xl:bg-pink-400 p-6 rounded-3xl shadow-xl ">
         <span className="font-semibold text-3xl">Select Item</span>
         <ul>
@@ -23,7 +23,7 @@ export default function Home() {
         </div>
       </div>
       <div className="bg-white overflow-hidden rounded-3xl shadow-xl group">
-        <div className="bg-blue-500 p-6 pb-14">
+        <div className="portrait:bg-indigo-500 landscape:bg-teal-500 p-6 pb-14 xl:pb-40">
           <span className="text-white text-2xl">Profile</span>
         </div>
         <div className="rounded-3xl p-6 bg-white relative -top-5">
@@ -44,7 +44,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col bg-white p-6 rounded-3xl shadow-xl ">
+      <div className="flex flex-col bg-white p-6 rounded-3xl shadow-xl lg:col-span-2 xl:col-span-1">
         <div className="flex flex-col mb-5 justify-between items-center ">
           <div className="flex w-full justify-between items-center">
             <span>⬅️</span>
