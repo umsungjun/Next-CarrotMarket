@@ -86,7 +86,9 @@ export default function Home() {
           </div>
         </div>
       </div>
-      {/* <div className="bg-white p-6 rounded-3xl shadow-xl "></div> */}
+      <div className="text-[#000] text-[99px] bg-[url('/vercel.svg')] bg-no-repeat">
+        원하는 글자 크기와 색깔
+      </div>
     </div>
   );
 }
