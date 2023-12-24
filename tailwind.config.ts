@@ -10,6 +10,6 @@ const config: Config = {
     extend: {},
   },
   darkMode: "media", // media일 때는 브라우저의 설정대로 darkMode가 적용 됨
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")],
 };
 export default config;
