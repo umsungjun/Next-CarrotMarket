@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 
 const Upload: NextPage = () => {
   return (
-    <div className="px-4 py-16">
+    <div className="px-4 space-y-5 py-16">
       <div>
         <div>
           <label className="w-full cursor-pointer text-gray-600 hover:border-orange-500 hover:text-orange-500 flex items-center justify-center border-2 border-dashed border-gray-300 h-48 rounded-md">
@@ -24,7 +24,7 @@ const Upload: NextPage = () => {
           </label>
         </div>
       </div>
-      <div className="my-5">
+      <div>
         <label
           htmlFor="price"
           className="mb-1 block text-sm font-medium text-gray-700"
@@ -55,7 +55,7 @@ const Upload: NextPage = () => {
           rows={4}
         />
       </div>
-      <button className="w-full mt-4 bg-orange-500 hover:bg-orange-600 text-white px-2 py-3 border-transparent rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 focus:border-orange-500 hover:transition-colors">
+      <button className="w-full bg-orange-500 hover:bg-orange-600 text-white px-2 py-3 border-transparent rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 focus:border-orange-500 hover:transition-colors">
         Upload product
       </button>
     </div>
