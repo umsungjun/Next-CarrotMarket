@@ -31,11 +31,11 @@ const Upload: NextPage = () => {
             htmlFor="price"
             className="mb-1 block text-sm font-medium text-gray-700"
           >
-            Price
+            가격
           </label>
           <div className="rounded-md relative flex items-center shadow-sm">
             <div className="absolute left-0 pointer-events-none pl-3 flex items-center justify-center">
-              <span className="text-gray-500 text-sm">$</span>
+              <span className="text-gray-500 text-sm">₩</span>
             </div>
             <input
               id="price"
@@ -44,13 +44,13 @@ const Upload: NextPage = () => {
               placeholder="0.00"
             />
             <div className="absolute right-0 pointer-events-none pr-3 flex items-center">
-              <span className="text-gray-500">USD</span>
+              <span className="text-gray-500">원</span>
             </div>
           </div>
         </div>
         <div>
           <label className="mb-1 block text-sm font-medium text-gray-700">
-            Description
+            설명
           </label>
           <textarea
             className="mt-1 shadow-sm w-full focus:ring-orange-500 rounded-md border-gray-300 focus:border-orange-500 resize-none"
@@ -58,7 +58,7 @@ const Upload: NextPage = () => {
           />
         </div>
         <button className="w-full bg-orange-500 hover:bg-orange-600 text-white px-2 py-3 border-transparent rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 focus:border-orange-500 hover:transition-colors">
-          Upload product
+          상품 등록
         </button>
       </div>
     </Layout>
