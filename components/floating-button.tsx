@@ -6,7 +6,7 @@ interface FloatingButton {
   href: string;
 }
 
-export default function FloatingButton({ children, href }: FloatingButton) {
+function FloatingButton({ children, href }: FloatingButton) {
   return (
     <Link
       href={href}
@@ -16,3 +16,5 @@ export default function FloatingButton({ children, href }: FloatingButton) {
     </Link>
   );
 }
+
+export default FloatingButton;
