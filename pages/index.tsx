@@ -1,3 +1,4 @@
+import FloatingButton from "@/components/floating-button";
 import Layout from "@/components/layout";
 
 export default function Home() {
@@ -57,7 +58,7 @@ export default function Home() {
             </div>
           </div>
         ))}
-        <button className="fixed bottom-24 text-white z-10 max-w-xl right-5 bg-orange-400 hover:bg-orange-500 rounded-full p-3 shadow-xl cursor-pointer transition-colors">
+        <FloatingButton href="/items/upload">
           <svg
             className="h-6 w-6"
             xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +74,7 @@ export default function Home() {
               d="M12 6v6m0 0v6m0-6h6m-6 0H6"
             />
           </svg>
-        </button>
+        </FloatingButton>
       </div>
     </Layout>
   );
