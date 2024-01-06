@@ -16,12 +16,12 @@ function Layout({ title, canGoBack, hasTabBar, children }: LayoutProps) {
   };
 
   return (
-    <div>
+    <>
       <div
         className={cls(
           !canGoBack ? "justify-center" : "",
           canGoBack && title ? "grid grid-cols-3" : "flex",
-          "bg-white w-full max-w-xl px-5 text-lg font-medium py-3 fixed text-gray-700 border-b top-0  items-center "
+          "bg-white  w-full max-w-xl px-5 text-lg font-medium py-3 fixed text-gray-700 border-b top-0 items-center "
         )}
       >
         {canGoBack ? (
@@ -127,7 +127,7 @@ function Layout({ title, canGoBack, hasTabBar, children }: LayoutProps) {
           </Link>
         </nav>
       ) : null}
-    </div>
+    </>
   );
 }
 
