@@ -4,7 +4,7 @@ import { NextPage } from "next";
 const EditProfile: NextPage = () => {
   return (
     <Layout title="프로필 수정" canGoBack>
-      <div className="py-10 px-4 space-y-4">
+      <div className=" px-4 space-y-4">
         <div className="flex items-center space-x-3">
           <div className="w-14 h-14 rounded-full bg-slate-500" />
           <label
