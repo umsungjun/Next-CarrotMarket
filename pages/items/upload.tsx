@@ -1,4 +1,6 @@
+import Button from "@/components/button";
 import Layout from "@/components/layout";
+import TextArea from "@/components/textarea";
 import type { NextPage } from "next";
 
 const Upload: NextPage = () => {
@@ -52,14 +54,9 @@ const Upload: NextPage = () => {
           <label className="mb-1 block text-sm font-medium text-gray-700">
             설명
           </label>
-          <textarea
-            className="mt-1 shadow-sm w-full focus:ring-orange-500 rounded-md border-gray-300 focus:border-orange-500 resize-none"
-            rows={4}
-          />
+          <TextArea />
         </div>
-        <button className="w-full bg-orange-500 hover:bg-orange-600 text-white px-2 py-3 border-transparent rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 focus:border-orange-500 hover:transition-colors">
-          상품 등록
-        </button>
+        <Button text="상품 등록" />
       </div>
     </Layout>
   );

@@ -1,3 +1,4 @@
+import Button from "@/components/button";
 import Layout from "@/components/layout";
 import { NextPage } from "next";
 
@@ -49,9 +50,7 @@ const EditProfile: NextPage = () => {
           </div>
           <div />
         </div>
-        <button className="mt-5 w-full bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 border-transparent rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 focus:border-orange-500 hover:transition-colors">
-          프로필 수정
-        </button>
+        <Button text="프로필 수정" />
       </div>
     </Layout>
   );
