@@ -2,7 +2,7 @@ import FloatingButton from "@/components/floating-button";
 import Item from "@/components/item";
 import Layout from "@/components/layout";
 
-export default function Home() {
+function Home() {
   return (
     <Layout title="홈" hasTabBar>
       <div className="flex flex-col space-y-5">
@@ -37,3 +37,5 @@ export default function Home() {
     </Layout>
   );
 }
+
+export default Home;
