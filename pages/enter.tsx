@@ -1,11 +1,27 @@
 import Input from "@/components/input";
 import { cls } from "@/libs/utils";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 
-export default function Enter() {
+interface EnterForm {
+  email?: string;
+  phone?: string;
+}
+
+function Enter() {
+  const { register, watch, handleSubmit, reset } = useForm<EnterForm>();
   const [method, setMethod] = useState<"email" | "phone">("email");
-  const onEmailClick = () => setMethod("email");
-  const onPhoneClick = () => setMethod("phone");
+  const onEmailClick = () => {
+    reset(), setMethod("email");
+  };
+  const onPhoneClick = () => {
+    reset(), setMethod("phone");
+  };
+
+  const onValid = (data: EnterForm) => {
+    console.log(data);
+  };
+
   return (
     <div className="mt-16 px-4">
       <h3 className="text-3xl font-bold text-center">Enter to Carrot</h3>
@@ -37,13 +53,31 @@ export default function Enter() {
             </button>
           </div>
         </div>
-        <form className="flex flex-col mt-8">
+        <form onSubmit={handleSubmit(onValid)} className="flex flex-col mt-8">
           <div>
             {method === "email" ? (
-              <Input label="Email Address" name="email" kind="text" />
+              <Input
+                register={register("email", {
+                  required: true,
+                })}
+                label="Email Address"
+                name="email"
+                kind="text"
+                type="email"
+                required
+              />
             ) : null}
             {method === "phone" ? (
-              <Input label="Phone Number" name="phone" kind="phone" />
+              <Input
+                register={register("phone", {
+                  required: true,
+                })}
+                label="Phone Number"
+                name="phone"
+                kind="phone"
+                type="number"
+                required
+              />
             ) : null}
           </div>
           <button className="mt-5 bg-orange-500 hover:bg-orange-600 text-white px-2 py-3 border-transparent rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 focus:border-orange-500 hover:transition-colors">
@@ -91,3 +125,5 @@ export default function Enter() {
     </div>
   );
 }
+
+export default Enter;
