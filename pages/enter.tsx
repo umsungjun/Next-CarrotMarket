@@ -1,3 +1,4 @@
+import Button from "@/components/button";
 import Input from "@/components/input";
 import { cls } from "@/libs/utils";
 import { useState } from "react";
@@ -9,6 +10,7 @@ interface EnterForm {
 }
 
 function Enter() {
+  const [submitting, setSubmitting] = useState(false);
   const { register, watch, handleSubmit, reset } = useForm<EnterForm>();
   const [method, setMethod] = useState<"email" | "phone">("email");
   const onEmailClick = () => {
@@ -19,7 +21,14 @@ function Enter() {
   };
 
   const onValid = (data: EnterForm) => {
-    console.log(data);
+    setSubmitting(true);
+    fetch("/api/users/enter", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(() => setSubmitting(false));
   };
 
   return (
@@ -53,7 +62,10 @@ function Enter() {
             </button>
           </div>
         </div>
-        <form onSubmit={handleSubmit(onValid)} className="flex flex-col mt-8">
+        <form
+          onSubmit={handleSubmit(onValid)}
+          className="flex flex-col mt-8 gap-5"
+        >
           <div>
             {method === "email" ? (
               <Input
@@ -80,10 +92,12 @@ function Enter() {
               />
             ) : null}
           </div>
-          <button className="mt-5 bg-orange-500 hover:bg-orange-600 text-white px-2 py-3 border-transparent rounded-md shadow-sm text-sm font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 focus:border-orange-500 hover:transition-colors">
-            {method === "email" ? "Get login link" : null}
-            {method === "phone" ? "Get one-time password" : null}
-          </button>
+          {method === "email" ? (
+            <Button text={submitting ? "Loading" : "Get login link"} />
+          ) : null}
+          {method === "phone" ? (
+            <Button text={submitting ? "Loading" : "Get one-time password"} />
+          ) : null}
         </form>
         <div className="mt-5">
           <div className="relative ">
