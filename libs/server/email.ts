@@ -6,7 +6,7 @@ const smtpTransport = nodemailer.createTransport({
   port: 587,
   auth: {
     user: "umseongjun@naver.com",
-    pass: "okum040500@",
+    pass: "비밀번호@",
   },
   tls: {
     rejectUnauthorized: false,
