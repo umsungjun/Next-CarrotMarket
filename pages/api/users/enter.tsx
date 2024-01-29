@@ -2,6 +2,7 @@ import twilio from "twilio";
 import client from "@/libs/server/client";
 import withHandler, { ResponseType } from "@/libs/server/withHandler";
 import { NextApiRequest, NextApiResponse } from "next";
+import smtpTransport from "@/libs/server/email";
 
 const twilioClient = require("twilio")(
   process.env.TWILIO_SID,
@@ -41,7 +42,24 @@ async function handler(
     });
     console.log(message);
   }
-
+  if (email) {
+    const mailOptions = {
+      from: "umseongjun@naver.com",
+      to: email,
+      subject: "Nomad Carrot Authentication Email",
+      text: `인증번호 : ${payload}`,
+    };
+    const result = await smtpTransport.sendMail(
+      mailOptions,
+      (error, responses) => {
+        if (error) {
+          console.error(error);
+        }
+      }
+    );
+    smtpTransport.close();
+    console.log(result);
+  }
   return res.json({
     ok: true,
   });
