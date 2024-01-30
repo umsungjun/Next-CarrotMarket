@@ -44,9 +44,9 @@ async function handler(
   }
   if (email) {
     const mailOptions = {
-      from: "umseongjun@naver.com",
+      from: process.env.MY_EMAIL,
       to: email,
-      subject: "Nomad Carrot Authentication Email",
+      subject: "당근 마켓",
       text: `인증번호 : ${payload}`,
     };
     const result = await smtpTransport.sendMail(
@@ -58,7 +58,6 @@ async function handler(
       }
     );
     smtpTransport.close();
-    console.log(result);
   }
   return res.json({
     ok: true,
