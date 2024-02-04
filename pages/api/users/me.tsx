@@ -15,21 +15,13 @@ async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseType>
 ) {
-  const { token } = req.body;
-  const exists = await client.token.findUnique({
+  console.log(req.session.user);
+  const profile = await client.user.findUnique({
     where: {
-      payload: token,
+      id: req.session.user?.id,
     },
-    // include: { user: true }, // option 추가 시 userID에 해당하는 유저 정보 또한 내려줌
   });
-
-  if (!exists) return res.status(404).end();
-  console.log(exists);
-  req.session.user = {
-    id: exists.userId,
-  };
-  await req.session.save();
-  res.status(200).end();
+  res.json({ ok: true, profile });
 }
 
-export default withApiSession(withHandler("POST", handler));
+export default withApiSession(withHandler("GET", handler));
