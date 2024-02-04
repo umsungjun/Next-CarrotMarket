@@ -8,19 +8,25 @@ async function handler(
   res: NextApiResponse<ResponseType>
 ) {
   const { token } = req.body;
-  const exists = await client.token.findUnique({
+  const foundToken = await client.token.findUnique({
     where: {
       payload: token,
     },
     // include: { user: true }, // option 추가 시 userID에 해당하는 유저 정보 또한 내려줌
   });
 
-  if (!exists) return res.status(404).end();
+  if (!foundToken) return res.status(404).end();
 
   req.session.user = {
-    id: exists.userId,
+    id: foundToken.userId,
   };
+
   await req.session.save();
+  await client.token.deleteMany({
+    where: {
+      userId: foundToken.userId,
+    },
+  });
   res.json({ ok: true });
 }
 
