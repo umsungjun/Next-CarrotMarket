@@ -5,8 +5,8 @@ import useUser from "@/libs/client/useUser";
 import Head from "next/head";
 
 function Home() {
-  const user = useUser();
-  console.log(user);
+  const { user, isLoading } = useUser();
+
   return (
     <Layout title="홈" hasTabBar>
       <Head>
