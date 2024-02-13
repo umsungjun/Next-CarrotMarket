@@ -11,7 +11,7 @@ interface ItemProps {
 function Item({ title, price, comments, hearts, id }: ItemProps) {
   return (
     <Link
-      href={`/items/${id}`}
+      href={`/products/${id}`}
       className="flex px-4 pt-5 cursor-pointer justify-between"
     >
       <div className="flex space-x-4">
