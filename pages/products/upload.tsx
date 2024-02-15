@@ -3,7 +3,10 @@ import Input from "@/components/input";
 import Layout from "@/components/layout";
 import TextArea from "@/components/textarea";
 import useMutation from "@/libs/client/useMutaion";
+import { Product } from "@prisma/client";
 import type { NextPage } from "next";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 interface UploadProductForm {
@@ -11,14 +14,27 @@ interface UploadProductForm {
   price: number;
   description: string;
 }
+interface UploadProductMutation {
+  ok: boolean;
+  product: Product;
+}
 
 const Upload: NextPage = () => {
+  const router = useRouter();
   const { register, handleSubmit } = useForm<UploadProductForm>();
-  const [upLoadProduct, { loading, data, error }] = useMutation("api/products");
+  const [upLoadProduct, { loading, data, error }] =
+    useMutation<UploadProductMutation>("/api/products");
   const onValid = (data: UploadProductForm) => {
     if (loading) return;
-    console.log(data);
+    upLoadProduct(data);
   };
+
+  useEffect(() => {
+    if (data?.ok) {
+      console.log(data);
+      router.push(`/products/${data.product.id}`);
+    }
+  }, [data, router]);
 
   return (
     <Layout canGoBack title="상품 등록">
