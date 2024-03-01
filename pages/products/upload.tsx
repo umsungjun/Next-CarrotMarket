@@ -2,7 +2,7 @@ import Button from "@/components/button";
 import Input from "@/components/input";
 import Layout from "@/components/layout";
 import TextArea from "@/components/textarea";
-import useMutation from "@/libs/client/useMutaion";
+import useMutation from "@/libs/client/useMutation";
 import { Product } from "@prisma/client";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";

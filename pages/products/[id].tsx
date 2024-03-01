@@ -1,6 +1,7 @@
 import Button from "@/components/button";
 import Layout from "@/components/layout";
-import useMutation from "@/libs/client/useMutaion";
+import useMutation from "@/libs/client/useMutation";
+import useUser from "@/libs/client/useUser";
 import { cls } from "@/libs/client/utils";
 import { Product, User } from "@prisma/client";
 import type { NextPage } from "next";
@@ -15,13 +16,14 @@ interface ProductWithUser extends Product {
 interface ItemDetailResponse {
   ok: boolean;
   product: ProductWithUser;
-  relatedProudcts: Product[];
+  relatedProducts: Product[];
   isLiked: boolean;
 }
 
 const ItemDetail: NextPage = () => {
+  const { user, isLoading } = useUser();
   const router = useRouter();
-  const { data, mutate } = useSWR<ItemDetailResponse>(
+  const { data, mutate: boundMutate } = useSWR<ItemDetailResponse>(
     router.query.id ? `/api/products/${router.query.id}` : null
   );
 
@@ -29,7 +31,7 @@ const ItemDetail: NextPage = () => {
 
   const onFavClick = () => {
     if (!data) return;
-    mutate({ ...data, isLiked: !data.isLiked }, false);
+    boundMutate({ ...data, isLiked: !data.isLiked }, false);
     toggleFav({});
   };
 
@@ -97,7 +99,7 @@ const ItemDetail: NextPage = () => {
         <div>
           <h2 className="text-2xl font-bold text-gray-900">Similar items</h2>
           <div className="mt-6 grid grid-cols-2 gap-4">
-            {data?.relatedProudcts.map((product) => (
+            {data?.relatedProducts.map((product) => (
               <Link key={product?.id} href={`/products/${product?.id}`}>
                 <div className="h-56 mb-4 w-full bg-slate-300" />
                 <h3 className="-mb-1 text-gray-700">{product?.name}</h3>

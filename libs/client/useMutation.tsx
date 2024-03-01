@@ -18,7 +18,7 @@ function useMutation<T = any>(url: string): UseMutationType<T> {
   const [data, setData] = useState<undefined | any>(undefined);
   const [error, setError] = useState<undefined | any>(undefined);
 
-  function mutaition(data: any) {
+  function mutation(data: any) {
     setLoading(true);
     fetch(url, {
       method: "POST",
@@ -37,7 +37,7 @@ function useMutation<T = any>(url: string): UseMutationType<T> {
       .finally(() => setLoading(false));
   }
 
-  return [mutaition, { loading, data, error }];
+  return [mutation, { loading, data, error }];
 }
 
 export default useMutation;

@@ -1,6 +1,6 @@
 import Button from "@/components/button";
 import Input from "@/components/input";
-import useMutation from "@/libs/client/useMutaion";
+import useMutation from "@/libs/client/useMutation";
 import { cls } from "@/libs/client/utils";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
