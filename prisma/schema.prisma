@@ -46,7 +46,7 @@ model Product {
   name        String
   price       String
   description String   @db.MediumText
-  Fav         Fav[]
+  favs        Fav[]
 
   @@index([userId])
 }
