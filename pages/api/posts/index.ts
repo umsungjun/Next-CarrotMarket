@@ -7,11 +7,13 @@ async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseType>
 ) {
-  const {
-    body: { question, latitude, longitude },
-    session: { user },
-  } = req;
   if (req.method === "GET") {
+    const {
+      query: { latitude, longitude },
+    } = req;
+
+    const parsedLatitude = latitude ? parseFloat(latitude.toString()) : 0;
+    const parsedLongitude = longitude ? parseFloat(longitude.toString()) : 0;
     const posts = await client.post.findMany({
       include: {
         user: {
@@ -28,11 +30,25 @@ async function handler(
           },
         },
       },
+      where: {
+        latitude: {
+          gte: parsedLatitude - 0.01, // get 크거나 같다
+          lte: parsedLatitude + 0.01, // lte 작거나 같다
+        },
+        longitude: {
+          gte: parsedLongitude - 0.01, // get 크거나 같다
+          lte: parsedLongitude + 0.01, // lte 작거나 같다
+        },
+      },
     });
     res.json({ ok: true, posts });
   }
 
   if (req.method === "POST") {
+    const {
+      body: { question, latitude, longitude },
+      session: { user },
+    } = req;
     const post = await client.post.create({
       data: {
         question,
