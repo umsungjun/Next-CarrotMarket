@@ -28,6 +28,8 @@ model User {
   wonderings      Wondering[]
   writtenReviews  Review[]    @relation(name: "writtenReviews")
   receviedReviews Review[]    @relation(name: "receviedReviews")
+  sale            Sale[]
+  purchase        Purchase[]
 }
 
 model Token {
@@ -42,16 +44,18 @@ model Token {
 }
 
 model Product {
-  id          Int      @id @default(autoincrement())
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id          Int        @id @default(autoincrement())
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId      Int
   image       String
   name        String
   price       String
-  description String   @db.MediumText
+  description String     @db.MediumText
   favs        Fav[]
+  sale        Sale[]
+  purchase    Purchase[]
 
   @@index([userId])
 }
@@ -123,4 +127,30 @@ model Review {
 
   @@index([createdById])
   @@index([createdForId])
+}
+
+model Sale {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([productId])
+}
+
+model Purchase {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([productId])
 }
