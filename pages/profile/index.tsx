@@ -1,5 +1,4 @@
 import Layout from "@/components/layout";
-import useUser from "@/libs/client/useUser";
 import { cls } from "@/libs/client/utils";
 import { Review, User } from "@prisma/client";
 import type { NextPage } from "next";
@@ -15,8 +14,7 @@ interface ReviewsResponse {
   reviews: ReviewWithUser[];
 }
 
-const Profile: NextPage = () => {
-  const { user } = useUser();
+const Profile: NextPage<{ user: User }> = (props) => {
   const { data } = useSWR<ReviewsResponse>("/api/reviews");
   return (
     <Layout title="나의 캐럿" hasTabBar>
@@ -24,7 +22,9 @@ const Profile: NextPage = () => {
         <div className="flex items-center space-x-3">
           <div className="w-16 h-16 bg-slate-500 rounded-full" />
           <div className="flex flex-col">
-            <span className="font-medium text-gray-900">{user?.name}</span>
+            <span className="font-medium text-gray-900">
+              {props?.user?.name}
+            </span>
             <Link href="profile/edit" className="text-sm text-gray-700">
               프로필 수정 &rarr;
             </Link>
@@ -95,7 +95,7 @@ const Profile: NextPage = () => {
             </span>
           </Link>
         </div>
-        {data?.reviews.map((review) => {
+        {data?.reviews?.map((review) => {
           return (
             <div key={review.id} className="mt-12">
               <div className="flex space-x-4 items-center">

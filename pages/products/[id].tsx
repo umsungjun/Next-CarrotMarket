@@ -1,7 +1,6 @@
 import Button from "@/components/button";
 import Layout from "@/components/layout";
 import useMutation from "@/libs/client/useMutation";
-import useUser from "@/libs/client/useUser";
 import { cls } from "@/libs/client/utils";
 import { Product, User } from "@prisma/client";
 import type { NextPage } from "next";
@@ -21,7 +20,6 @@ interface ItemDetailResponse {
 }
 
 const ItemDetail: NextPage = () => {
-  const { user, isLoading } = useUser();
   const router = useRouter();
   const { mutate } = useSWRConfig();
   const { data, mutate: boundMutate } = useSWR<ItemDetailResponse>(
