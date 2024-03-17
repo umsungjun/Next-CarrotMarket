@@ -95,7 +95,7 @@ const Profile: NextPage = () => {
             </span>
           </Link>
         </div>
-        {data?.reviews.map((review) => {
+        {data?.reviews?.map((review) => {
           return (
             <div key={review.id} className="mt-12">
               <div className="flex space-x-4 items-center">
