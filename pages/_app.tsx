@@ -1,3 +1,4 @@
+import LoginCheck from "@/components/LoginCheck";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { SWRConfig } from "swr";
@@ -11,6 +12,7 @@ export default function App({ Component, pageProps }: AppProps) {
       }}
     >
       <div className="w-full max-w-xl mx-auto">
+        <LoginCheck />
         <Component {...pageProps} />
       </div>
     </SWRConfig>
