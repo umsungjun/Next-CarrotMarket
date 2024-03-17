@@ -1,6 +1,7 @@
 import FloatingButton from "@/components/floating-button";
 import Item from "@/components/item";
 import Layout from "@/components/layout";
+import useUser from "@/libs/client/useUser";
 import { Product } from "@prisma/client";
 import Head from "next/head";
 import useSWR from "swr";
@@ -17,6 +18,7 @@ interface ProductsResponse {
 }
 
 function Home() {
+  const { user, isLoading } = useUser();
   const { data } = useSWR<ProductsResponse>("/api/products");
 
   return (
