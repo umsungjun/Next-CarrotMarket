@@ -79,7 +79,7 @@ function Enter() {
                 required
               />
             </div>
-            <Button text={tokenLoading ? "로딩중..." : "인증 로그인"} />
+            <Button text={tokenLoading ? "로딩중..." : "인증 번호 로그인"} />
           </form>
         ) : (
           <>
