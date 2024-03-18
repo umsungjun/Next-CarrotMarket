@@ -21,7 +21,7 @@ interface ItemDetailResponse {
 }
 
 const ItemDetail: NextPage = () => {
-  const { user, isLoading } = useUser();
+  useUser();
   const router = useRouter();
   const { mutate } = useSWRConfig();
   const { data, mutate: boundMutate } = useSWR<ItemDetailResponse>(

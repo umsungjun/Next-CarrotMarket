@@ -18,7 +18,7 @@ interface ProductsResponse {
 }
 
 function Home() {
-  const { user, isLoading } = useUser();
+  useUser();
   const { data } = useSWR<ProductsResponse>("/api/products");
 
   return (
