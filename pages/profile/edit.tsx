@@ -1,11 +1,27 @@
 import Button from "@/components/button";
 import Input from "@/components/input";
 import Layout from "@/components/layout";
-import useUser from "@/libs/client/useUser";
+import { User } from "@prisma/client";
 import { NextPage } from "next";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
 
-const EditProfile: NextPage = () => {
-  const { user } = useUser();
+interface EditProfileForm {
+  email?: string;
+  phone?: string;
+}
+
+const EditProfile: NextPage<{ user: User }> = ({ user }) => {
+  const { register, setValue } = useForm<EditProfileForm>();
+  console.log(user);
+  useEffect(() => {
+    if (user?.email) {
+      setValue("email", user.email);
+    }
+    if (user?.phone) {
+      setValue("email", user.phone);
+    }
+  }, [user, setValue]);
   return (
     <Layout title="프로필 수정" canGoBack>
       <div className=" px-4 space-y-4">
@@ -25,10 +41,24 @@ const EditProfile: NextPage = () => {
           </label>
         </div>
         <div className="space-y-1">
-          <Input label="email" name="email" kind="text" />
+          <Input
+            register={register("email")}
+            required={false}
+            type="email"
+            label="email"
+            name="email"
+            kind="text"
+          />
         </div>
         <div className="space-y-1">
-          <Input label="phone" name="phone" kind="phone" />
+          <Input
+            register={register("phone")}
+            required={false}
+            type="text"
+            label="phone"
+            name="phone"
+            kind="phone"
+          />
           <div />
         </div>
         <Button text="프로필 수정" />
