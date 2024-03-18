@@ -79,7 +79,7 @@ function Enter() {
                 required
               />
             </div>
-            <Button text={tokenLoading ? "Loading" : "Confirm Token"} />
+            <Button text={tokenLoading ? "로딩중..." : "인증 로그인"} />
           </form>
         ) : (
           <>
@@ -97,7 +97,7 @@ function Enter() {
                   )}
                   onClick={onEmailClick}
                 >
-                  Email Address
+                  이메일
                 </button>
                 <button
                   className={cls(
@@ -108,7 +108,7 @@ function Enter() {
                   )}
                   onClick={onPhoneClick}
                 >
-                  Phone Number
+                  휴대폰 번호
                 </button>
               </div>
             </div>
@@ -122,7 +122,7 @@ function Enter() {
                     register={register("email", {
                       required: true,
                     })}
-                    label="Email Address"
+                    label="이메일"
                     name="email"
                     kind="text"
                     type="email"
@@ -134,7 +134,7 @@ function Enter() {
                     register={register("phone", {
                       required: true,
                     })}
-                    label="Phone Number"
+                    label="휴대폰 번호"
                     name="phone"
                     kind="phone"
                     type="number"
@@ -143,10 +143,10 @@ function Enter() {
                 ) : null}
               </div>
               {method === "email" ? (
-                <Button text={loading ? "Loading" : "Get login link"} />
+                <Button text={loading ? "로딩중..." : "이메일 로그인"} />
               ) : null}
               {method === "phone" ? (
-                <Button text={loading ? "Loading" : "Get one-time password"} />
+                <Button text={loading ? "로딩중..." : "휴대폰 번호 로그인"} />
               ) : null}
             </form>
           </>
