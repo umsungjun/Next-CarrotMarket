@@ -1,9 +1,11 @@
 import Button from "@/components/button";
 import Input from "@/components/input";
 import Layout from "@/components/layout";
+import useUser from "@/libs/client/useUser";
 import { NextPage } from "next";
 
 const EditProfile: NextPage = () => {
+  const { user } = useUser();
   return (
     <Layout title="프로필 수정" canGoBack>
       <div className=" px-4 space-y-4">
