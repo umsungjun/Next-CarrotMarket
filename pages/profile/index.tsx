@@ -15,7 +15,8 @@ interface ReviewsResponse {
   reviews: ReviewWithUser[];
 }
 
-const Profile: NextPage<{ user: User }> = ({ user }) => {
+const Profile: NextPage = () => {
+  const { user } = useUser();
   const { data } = useSWR<ReviewsResponse>("/api/reviews");
   return (
     <Layout title="나의 캐럿" hasTabBar>
