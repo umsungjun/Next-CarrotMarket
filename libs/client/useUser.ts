@@ -13,7 +13,7 @@ export default function useUser() {
   const { data, error } = useSWR<ProfileResponse>(
     router.pathname !== "/enter" ? `/api/users/me` : null
   );
-  console.log(error);
+
   useEffect(() => {
     if (router.pathname !== "/enter") {
       if (data && !data.ok) {
