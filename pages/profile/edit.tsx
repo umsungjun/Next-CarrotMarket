@@ -1,7 +1,7 @@
 import Button from "@/components/button";
 import Input from "@/components/input";
 import Layout from "@/components/layout";
-import { User } from "@prisma/client";
+import useUser from "@/libs/client/useUser";
 import { NextPage } from "next";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -9,11 +9,19 @@ import { useForm } from "react-hook-form";
 interface EditProfileForm {
   email?: string;
   phone?: string;
+  formErrors?: string;
 }
 
-const EditProfile: NextPage<{ user: User }> = ({ user }) => {
-  const { register, setValue } = useForm<EditProfileForm>();
-  console.log(user);
+const EditProfile: NextPage = () => {
+  const { user } = useUser();
+  const {
+    register,
+    setValue,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm<EditProfileForm>();
+
   useEffect(() => {
     if (user?.email) {
       setValue("email", user.email);
@@ -22,9 +30,17 @@ const EditProfile: NextPage<{ user: User }> = ({ user }) => {
       setValue("email", user.phone);
     }
   }, [user, setValue]);
+
+  const onValid = ({ email, phone }: EditProfileForm) => {
+    if (email === "" && phone === "") {
+      setError("formErrors", {
+        message: "이메일 또는 휴대폰 번호가 필수입력입니다.",
+      });
+    }
+  };
   return (
     <Layout title="프로필 수정" canGoBack>
-      <div className=" px-4 space-y-4">
+      <form className=" px-4 space-y-4" onSubmit={handleSubmit(onValid)}>
         <div className="flex items-center space-x-3">
           <div className="w-14 h-14 rounded-full bg-slate-500" />
           <label
@@ -45,7 +61,7 @@ const EditProfile: NextPage<{ user: User }> = ({ user }) => {
             register={register("email")}
             required={false}
             type="email"
-            label="email"
+            label="이메일"
             name="email"
             kind="text"
           />
@@ -54,15 +70,20 @@ const EditProfile: NextPage<{ user: User }> = ({ user }) => {
           <Input
             register={register("phone")}
             required={false}
-            type="text"
-            label="phone"
+            type="number"
+            label="휴대폰 번호"
             name="phone"
             kind="phone"
           />
           <div />
         </div>
+        {errors.formErrors ? (
+          <span className="my-2 font-medium text-center text-red-500 block">
+            {errors.formErrors.message}
+          </span>
+        ) : null}
         <Button text="프로필 수정" />
-      </div>
+      </form>
     </Layout>
   );
 };
