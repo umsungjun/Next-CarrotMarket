@@ -1,15 +1,21 @@
 import Button from "@/components/button";
 import Input from "@/components/input";
 import Layout from "@/components/layout";
+import useMutation from "@/libs/client/useMutation";
 import useUser from "@/libs/client/useUser";
 import { NextPage } from "next";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 interface EditProfileForm {
+  name?: string;
   email?: string;
   phone?: string;
   formErrors?: string;
+}
+interface EditProfileResponse {
+  ok: boolean;
+  error?: string;
 }
 
 const EditProfile: NextPage = () => {
@@ -23,6 +29,9 @@ const EditProfile: NextPage = () => {
   } = useForm<EditProfileForm>();
 
   useEffect(() => {
+    if (user?.name) {
+      setValue("name", user.name);
+    }
     if (user?.email) {
       setValue("email", user.email);
     }
@@ -31,13 +40,25 @@ const EditProfile: NextPage = () => {
     }
   }, [user, setValue]);
 
-  const onValid = ({ email, phone }: EditProfileForm) => {
-    if (email === "" && phone === "") {
-      setError("formErrors", {
-        message: "이메일 또는 휴대폰 번호가 필수입력입니다.",
+  const [editProfile, { data, loading }] =
+    useMutation<EditProfileResponse>("/api/users/me");
+
+  const onValid = ({ name, email, phone }: EditProfileForm) => {
+    if (loading) return;
+    if (name === "" && email === "" && phone === "") {
+      return setError("formErrors", {
+        message: "이름, 이메일, 휴대폰 번호 중 하나는 필수입력입니다.",
       });
     }
+    editProfile({ name, email, phone });
   };
+  useEffect(() => {
+    if (data && !data.ok) {
+      return setError("formErrors", {
+        message: data.error,
+      });
+    }
+  }, [data, setError]);
   return (
     <Layout title="프로필 수정" canGoBack>
       <form className=" px-4 space-y-4" onSubmit={handleSubmit(onValid)}>
@@ -55,6 +76,16 @@ const EditProfile: NextPage = () => {
               accept="image/*"
             />
           </label>
+        </div>
+        <div className="space-y-1">
+          <Input
+            register={register("name")}
+            required={false}
+            type="text"
+            label="이름"
+            name="name"
+            kind="text"
+          />
         </div>
         <div className="space-y-1">
           <Input
@@ -82,7 +113,7 @@ const EditProfile: NextPage = () => {
             {errors.formErrors.message}
           </span>
         ) : null}
-        <Button text="프로필 수정" />
+        <Button text={loading ? "로딩중..." : "프로필 수정"} />
       </form>
     </Layout>
   );
