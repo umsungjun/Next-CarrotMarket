@@ -30,8 +30,8 @@ model User {
   receviedReviews Review[]    @relation(name: "receviedReviews")
   sale            Sale[]
   purchase        Purchase[]
-  stream          Stream[]
-  message         Message[]
+  streams         Stream[]
+  messages        Message[]
 }
 
 model Token {
