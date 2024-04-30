@@ -16,7 +16,7 @@ const Live: NextPage = () => {
             </div>
           );
         })}
-        <FloatingButton href="/live/create">
+        <FloatingButton href="/streams/create">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
