@@ -14,7 +14,7 @@ const LiveDetail: NextPage = () => {
   const { data } = useSWR<StreamResponse>(
     router.query.id ? `/api/streams/${router.query.id}` : null
   );
-  console.log("data", data);
+
   return (
     <Layout canGoBack>
       <div className="px-4 space-y-4">
