@@ -1,14 +1,32 @@
 import Layout from "@/components/layout";
+import { Stream } from "@prisma/client";
 import { NextPage } from "next";
+import { useRouter } from "next/router";
+import useSWR from "swr";
+
+interface StreamResponse {
+  ok: boolean;
+  stream: Stream;
+}
 
 const LiveDetail: NextPage = () => {
+  const router = useRouter();
+  const { data } = useSWR<StreamResponse>(
+    router.query.id ? `/api/streams/${router.query.id}` : null
+  );
+  console.log("data", data);
   return (
     <Layout canGoBack>
       <div className="px-4 space-y-4">
         <div className="w-full rounded-md shadow-sm bg-slate-300 aspect-video" />
-        <h3 className="text-gray-800 font-semibold text-2xl mt-2">
-          Let&apos;s try potatos
-        </h3>
+        <h1 className="text-xl font-bold text-gray-900">
+          {data?.stream?.name}
+        </h1>
+        <span className="text-xl block mt-3 text-gray-900">
+          ${data?.stream?.price}
+        </span>
+        <p className=" my-6 text-gray-700">{data?.stream?.description}</p>
+        <h1 className="text-xl font-bold text-gray-900">Live Chat</h1>
         <div className="py-10 pb-16 h-[50vh] px-4 space-y-4 overflow-y-scroll">
           <div className="flex items-start space-x-2">
             <div className="w-8 h-8 rounded-full bg-slate-400" />
