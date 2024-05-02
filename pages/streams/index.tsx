@@ -16,7 +16,7 @@ const Streams: NextPage = () => {
 
   return (
     <Layout title="라이브" hasTabBar>
-      <div className="divide-y-2 space-y-4 px-4">
+      <div className="flex flex-col gap-4">
         {data?.streams.map((stream) => {
           return (
             <Link
