@@ -3,34 +3,58 @@ import Layout from "@/components/layout";
 import { Stream } from "@prisma/client";
 import { NextPage } from "next";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 import useSWR from "swr";
 
 interface StreamsResponse {
   ok: boolean;
   streams: Stream[];
+  totalCount: number;
 }
 
 const Streams: NextPage = () => {
-  const { data } = useSWR<StreamsResponse>(`/api/streams`);
-  console.log(data);
+  const [streamsData, setStreamsData] = useState<Stream[]>([]);
+  const [page, setPage] = useState<number>(0);
+  const { data, isLoading } = useSWR<StreamsResponse>(
+    `/api/streams?page=${page}`
+  );
+
+  useEffect(() => {
+    if (data && data.ok) {
+      setStreamsData([...streamsData, ...data.streams]);
+    }
+  }, [data]);
+
+  const { ref, inView } = useInView({
+    threshold: 0.5,
+  });
+
+  useEffect(() => {
+    if (!isLoading) {
+      setPage((prevPage) => prevPage + 1);
+    }
+  }, [inView]);
 
   return (
     <Layout title="라이브" hasTabBar>
       <div className="flex flex-col gap-4">
-        {data?.streams.map((stream) => {
-          return (
-            <Link
-              href={`/streams/${stream.id}`}
-              key={stream.id}
-              className="pt-4 px-4"
-            >
-              <div className="w-full rounded-md shadow-sm bg-slate-300 aspect-video" />
-              <h3 className="text-gray-700 font-semibold text-xl mt-2">
-                {stream?.name}
-              </h3>
-            </Link>
-          );
-        })}
+        {0 < streamsData.length &&
+          streamsData.map((stream) => {
+            return (
+              <Link
+                href={`/streams/${stream.id}`}
+                key={stream.id}
+                className="pt-4 px-4"
+              >
+                <div className="w-full rounded-md shadow-sm bg-slate-300 aspect-video" />
+                <h3 className="text-gray-700 font-semibold text-xl mt-2">
+                  {stream?.name}
+                </h3>
+              </Link>
+            );
+          })}
+        {data && streamsData.length < data?.totalCount && <div ref={ref} />}
         <FloatingButton href="/streams/create">
           <svg
             xmlns="http://www.w3.org/2000/svg"
