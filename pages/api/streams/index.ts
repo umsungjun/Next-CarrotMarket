@@ -26,8 +26,16 @@ async function handler(
     });
     return res.json({ ok: true, stream });
   } else if (req.method === "GET") {
-    const streams = await client.stream.findMany();
-    return res.json({ ok: true, streams });
+    const { page } = req.query;
+    const streams = await client.stream.findMany({
+      take: 5,
+      skip: page ? +page * 5 : 0,
+      orderBy: {
+        id: "desc",
+      },
+    });
+    const totalCount = await client.stream.count();
+    return res.json({ ok: true, streams, totalCount });
   }
 }
 
