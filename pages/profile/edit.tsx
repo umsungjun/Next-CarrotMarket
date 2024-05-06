@@ -45,15 +45,29 @@ const EditProfile: NextPage = () => {
   const [editProfile, { data, loading }] =
     useMutation<EditProfileResponse>("/api/users/me");
 
-  const onValid = ({ name, email, phone, avatar }: EditProfileForm) => {
+  const onValid = async ({ name, email, phone, avatar }: EditProfileForm) => {
     if (loading) return;
     if (name === "" && email === "" && phone === "") {
       return setError("formErrors", {
         message: "이름, 이메일, 휴대폰 번호 중 하나는 필수입력입니다.",
       });
     }
-    editProfile({ name, email, phone });
+    if (avatar && 0 < avatar.length && user) {
+      const { id, uploadURL } = await (await fetch(`/api/files`)).json();
+      const form = new FormData();
+      form.append("file", avatar[0], user.id + "");
+      await fetch(uploadURL, {
+        method: "POST",
+        body: form,
+      });
+
+      return;
+      editProfile({ name, email, phone });
+    } else {
+      editProfile({ name, email, phone });
+    }
   };
+
   useEffect(() => {
     if (data && !data.ok) {
       return setError("formErrors", {
