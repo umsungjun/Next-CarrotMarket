@@ -40,6 +40,11 @@ const EditProfile: NextPage = () => {
     if (user?.phone) {
       setValue("email", user.phone);
     }
+    if (user?.avatar) {
+      setAvatarPreview(
+        `https://imagedelivery.net/Fxbz5xV7vyEmqagr1Ejwow/${user?.avatar}/avatar`
+      );
+    }
   }, [user, setValue]);
 
   const [editProfile, { data, loading }] =
@@ -53,16 +58,19 @@ const EditProfile: NextPage = () => {
       });
     }
     if (avatar && 0 < avatar.length && user) {
-      const { id, uploadURL } = await (await fetch(`/api/files`)).json();
+      const { uploadURL } = await (await fetch(`/api/files`)).json();
       const form = new FormData();
       form.append("file", avatar[0], user.id + "");
-      await fetch(uploadURL, {
-        method: "POST",
-        body: form,
-      });
 
-      return;
-      editProfile({ name, email, phone });
+      const {
+        result: { id },
+      } = await (
+        await fetch(uploadURL, {
+          method: "POST",
+          body: form,
+        })
+      ).json();
+      editProfile({ name, email, phone, avatarId: id });
     } else {
       editProfile({ name, email, phone });
     }
@@ -80,7 +88,6 @@ const EditProfile: NextPage = () => {
   const avatar = watch("avatar");
   useEffect(() => {
     if (avatar && 0 < avatar.length) {
-      console.log(avatar);
       const file = avatar[0];
       setAvatarPreview(URL.createObjectURL(file));
     }
