@@ -4,6 +4,7 @@ import Layout from "@/components/layout";
 import useMutation from "@/libs/client/useMutation";
 import useUser from "@/libs/client/useUser";
 import { NextPage } from "next";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
@@ -98,12 +99,15 @@ const EditProfile: NextPage = () => {
       <form className=" px-4 space-y-4" onSubmit={handleSubmit(onValid)}>
         <div className="flex items-center space-x-3">
           {avatarPreview ? (
-            <img
+            <Image
+              width={56}
+              height={56}
+              alt="profile_img"
               src={avatarPreview}
-              className="w-14 h-14 rounded-full bg-slate-500"
+              className="w-14 h-14 rounded-full"
             />
           ) : (
-            <div className="w-14 h-14 rounded-full bg-slate-500" />
+            <div className="w-14 h-14 rounded-full bg-slate-100" />
           )}
           <label
             htmlFor="picture"
