@@ -30,7 +30,7 @@ interface MessageForm {
 
 const StreamDetail: NextPage = () => {
   const { user } = useUser();
-  console.log(user);
+
   const router = useRouter();
   const { register, handleSubmit, reset } = useForm<MessageForm>();
   const { data, mutate } = useSWR<StreamResponse>(
