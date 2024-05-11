@@ -19,16 +19,18 @@ function Item({ title, price, image, comments, hearts, id }: ItemProps) {
       <div className="flex space-x-4">
         <div className="relative w-20 h-20 bg-gray-400 rounded-md overflow-hidden">
           <Image
+            className="aspect-square"
             src={`https://imagedelivery.net/Fxbz5xV7vyEmqagr1Ejwow/${image}/productThumbnail`}
             width={80}
             height={80}
             alt="product_img"
             priority={true}
+            quality={100}
           />
         </div>
         <div className="pt-2 flex flex-col">
           <h3 className="text-sm font-medium text-gray-900">{title}</h3>
-          <span className="font-medium mt-1 text-gray-900">${price}</span>
+          <span className="font-medium mt-1 text-gray-900">₩ {price}</span>
         </div>
       </div>
       <div className="flex space-x-2 items-end justify-end">
@@ -49,7 +51,7 @@ function Item({ title, price, image, comments, hearts, id }: ItemProps) {
           </svg>
           <span>{hearts}</span>
         </div>
-        <div className="flex space-x-0.5 items-center text-sm  text-gray-600">
+        {/* <div className="flex space-x-0.5 items-center text-sm  text-gray-600">
           <svg
             className="w-4 h-4"
             fill="none"
@@ -65,7 +67,7 @@ function Item({ title, price, image, comments, hearts, id }: ItemProps) {
             ></path>
           </svg>
           <span>{comments}</span>
-        </div>{" "}
+        </div>{" "} */}
       </div>
     </Link>
   );
