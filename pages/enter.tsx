@@ -5,6 +5,8 @@ import { cls } from "@/libs/client/utils";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import Lottie from "react-lottie-player";
+import mapAnimation from "../assets/animation/map.json";
 
 interface EnterForm {
   email?: string;
@@ -60,9 +62,13 @@ function Enter() {
   }, [tokenData, router]);
 
   return (
-    <div className="mt-16 px-4">
-      <h3 className="text-3xl font-bold text-center">Enter to Carrot</h3>
-      <div className="mt-8">
+    <div className="pt-16 px-4">
+      <div className="flex justify-center items-center">
+        <h3 className="text-3xl font-bold text-center text-orange-400">
+          댱근 마켓
+        </h3>
+      </div>
+      <div>
         {data?.ok ? (
           <form
             onSubmit={tokenHandleSubmit(onTokenValid)}
@@ -84,9 +90,9 @@ function Enter() {
         ) : (
           <>
             <div className="flex flex-col items-center">
-              <h5 className="text-sm text-gray-500 font-medium">
+              {/* <h5 className="text-sm text-gray-500 font-medium">
                 Enter using:
-              </h5>
+              </h5> */}
               <div className="grid w-full mt-8 grid-cols-2 ">
                 <button
                   className={cls(
@@ -151,17 +157,16 @@ function Enter() {
             </form>
           </>
         )}
-
-        <div className="mt-5">
+        <div className="mt-10">
           <div className="relative ">
             <div className="absolute w-full border-t border-gray-300" />
             <div className="relative -top-3 text-center">
               <span className="bg-white px-2 text-sm text-gray-500">
-                Or enter with
+                다른 계정으로 로그인
               </span>
             </div>
           </div>
-          <div className="grid grid-cols-2 mt-2 gap-3">
+          <div className="grid grid-cols-2 mt-5 gap-3">
             <button className="flex justify-center items-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50">
               <svg
                 className="w-5 h-5"
@@ -188,6 +193,7 @@ function Enter() {
             </button>
           </div>
         </div>
+        <Lottie className="mt-10" loop animationData={mapAnimation} play />
       </div>
     </div>
   );
