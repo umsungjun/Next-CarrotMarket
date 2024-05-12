@@ -21,7 +21,7 @@ function Layout({ title, canGoBack, hasTabBar, children }: LayoutProps) {
         className={cls(
           !canGoBack ? "justify-center" : "",
           canGoBack && title ? "grid grid-cols-3" : "flex",
-          "bg-white  w-full max-w-xl px-5 text-lg font-medium py-3 fixed text-gray-700 border-b top-0 items-center "
+          "bg-white  w-full max-w-[480px] px-5 text-lg font-medium py-3 fixed text-gray-700 border-b top-0 items-center "
         )}
       >
         {canGoBack ? (
@@ -33,7 +33,7 @@ function Layout({ title, canGoBack, hasTabBar, children }: LayoutProps) {
       </div>
       <div className={cls("pt-16", hasTabBar ? "pb-24" : "")}>{children}</div>
       {hasTabBar ? (
-        <nav className="bg-white max-w-xl text-gray-700 border-t fixed bottom-0 w-full px-10 pb-5 pt-3 flex justify-between text-xs">
+        <nav className="bg-white max-w-[480px] text-gray-700 border-t fixed bottom-0 w-full px-10 pb-5 pt-3 flex justify-between text-xs">
           <Link
             href="/"
             className={cls(
@@ -109,7 +109,7 @@ function Layout({ title, canGoBack, hasTabBar, children }: LayoutProps) {
             </svg>
             <span>채팅</span>
           </Link>
-          <Link
+          {/*           <Link
             href="/streams"
             className={cls(
               "flex flex-col items-center space-y-2 ",
@@ -133,7 +133,7 @@ function Layout({ title, canGoBack, hasTabBar, children }: LayoutProps) {
               />
             </svg>
             <span>라이브</span>
-          </Link>
+          </Link> */}
           <Link
             href="/profile"
             className={cls(
