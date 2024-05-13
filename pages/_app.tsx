@@ -10,7 +10,7 @@ export default function App({ Component, pageProps }: AppProps) {
           fetch(url).then((response) => response.json()),
       }}
     >
-      <div className="relative w-full max-w-[480px] mx-auto h-screen border border-y-0">
+      <div className="relative w-[480px] h-full mx-auto border border-y-0 box-content">
         <Component {...pageProps} />
       </div>
     </SWRConfig>
