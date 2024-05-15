@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -6,21 +7,21 @@ interface ItemProps {
   id: number;
   image: string;
   price: string;
-  comments: number;
   hearts: number;
+  createdAt: Date;
 }
 
-function Item({ title, price, image, comments, hearts, id }: ItemProps) {
+function Item({ title, price, image, hearts, id, createdAt }: ItemProps) {
   return (
     <Link
       href={`/products/${id}`}
-      className="flex px-4 pt-5 cursor-pointer justify-between"
+      className="flex px-4 pt-5 first:pt-0 cursor-pointer justify-between"
     >
       <div className="flex space-x-4">
-        <div className="relative w-20 h-20 bg-gray-400 rounded-md overflow-hidden">
+        <div className="relative w-20 h-20 rounded-md overflow-hidden">
           <Image
             className="aspect-square"
-            src={`https://imagedelivery.net/Fxbz5xV7vyEmqagr1Ejwow/${image}/productThumbnail`}
+            src={`https://imagedelivery.net/Fxbz5xV7vyEmqagr1Ejwow/${image}/public`}
             width={80}
             height={80}
             alt="product_img"
@@ -28,9 +29,12 @@ function Item({ title, price, image, comments, hearts, id }: ItemProps) {
             quality={100}
           />
         </div>
-        <div className="pt-2 flex flex-col">
+        <div className="pt-2 flex flex-col justify-center">
           <h3 className="text-sm font-medium text-gray-900">{title}</h3>
           <span className="font-medium mt-1 text-gray-900">₩ {price}</span>
+          {/* <span className="text-xs mt-auto">
+            {format(createdAt, "yyyy-MM-dd")}
+          </span> */}
         </div>
       </div>
       <div className="flex space-x-2 items-end justify-end">
