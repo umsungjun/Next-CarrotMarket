@@ -15,7 +15,7 @@ function Item({ title, price, image, hearts, id, createdAt }: ItemProps) {
   return (
     <Link
       href={`/products/${id}`}
-      className="flex px-4 pt-5 first:pt-0 cursor-pointer justify-between"
+      className="flex px-4 pt-5 cursor-pointer justify-between"
     >
       <div className="flex space-x-4">
         <div className="relative w-20 h-20 rounded-md overflow-hidden">
@@ -31,7 +31,7 @@ function Item({ title, price, image, hearts, id, createdAt }: ItemProps) {
         </div>
         <div className="pt-2 flex flex-col justify-center">
           <h3 className="text-sm font-medium text-gray-900">{title}</h3>
-          <span className="font-medium mt-1 text-gray-900">₩ {price}</span>
+          <span className="font-medium mt-1 text-gray-900">₩ {price} 원</span>
           {/* <span className="text-xs mt-auto">
             {format(createdAt, "yyyy-MM-dd")}
           </span> */}
@@ -55,23 +55,6 @@ function Item({ title, price, image, hearts, id, createdAt }: ItemProps) {
           </svg>
           <span>{hearts}</span>
         </div>
-        {/* <div className="flex space-x-0.5 items-center text-sm  text-gray-600">
-          <svg
-            className="w-4 h-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-            ></path>
-          </svg>
-          <span>{comments}</span>
-        </div>{" "} */}
       </div>
     </Link>
   );
