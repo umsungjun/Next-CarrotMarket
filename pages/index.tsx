@@ -25,7 +25,7 @@ function Home() {
     <>
       <Title pageTitle={"홈"} />
       <Layout title="홈" hasTabBar>
-        <div className="flex flex-col space-y-5">
+        <div className="flex flex-col space-y-5 overflow-y-scroll h-screen pb-36">
           {data?.products?.map((product) => (
             <Item
               id={product.id}
