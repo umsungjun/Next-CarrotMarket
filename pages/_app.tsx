@@ -11,7 +11,7 @@ export default function App({ Component, pageProps }: AppProps) {
           fetch(url).then((response) => response.json()),
       }}
     >
-      <div className="relative w-[480px] h-full mx-auto border border-y-0 box-content">
+      <div className="relative max-w-[480px] min-w-[280px] h-full mx-auto border border-y-0 box-content">
         <Head>
           <link
             rel="icon"
