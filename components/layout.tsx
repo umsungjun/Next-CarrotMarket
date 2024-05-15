@@ -31,9 +31,11 @@ function Layout({ title, canGoBack, hasTabBar, children }: LayoutProps) {
         ) : null}
         {title ? <span className="text-center">{title}</span> : null}
       </div>
-      <div className={cls("pt-16", hasTabBar ? "pb-24" : "")}>{children}</div>
+      <div className={cls("pt-[3.3rem]", hasTabBar ? "pb-24" : "")}>
+        {children}
+      </div>
       {hasTabBar ? (
-        <nav className="bg-white max-w-[480px] text-gray-700 border-t fixed bottom-0 w-full px-10 pb-5 pt-3 flex justify-between text-xs">
+        <nav className="bg-white max-w-[480px] min-w-[280px] text-gray-700 border-t fixed bottom-0 w-full px-10 pb-5 pt-3 flex justify-between text-xs">
           <Link
             href="/"
             className={cls(
