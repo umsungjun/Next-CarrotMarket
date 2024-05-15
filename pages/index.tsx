@@ -4,6 +4,8 @@ import Layout from "@/components/layout";
 import Title from "@/components/title";
 import useUser from "@/libs/client/useUser";
 import { Product } from "@prisma/client";
+import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 import useSWR from "swr";
 
 export interface ProductWithCount extends Product {
@@ -15,18 +17,42 @@ export interface ProductWithCount extends Product {
 interface ProductsResponse {
   ok: boolean;
   products: ProductWithCount[];
+  totalCount: number;
 }
 
 function Home() {
   useUser();
-  const { data } = useSWR<ProductsResponse>("/api/products");
+  const [productData, setProductData] = useState<ProductWithCount[]>([]);
+  const [page, setPage] = useState<number>(0);
+  const { data, isLoading } = useSWR<ProductsResponse>(
+    `/api/products?page=${page}`
+  );
+  const { ref, inView } = useInView({
+    threshold: 0.5,
+  });
+
+  useEffect(() => {
+    setPage(0);
+  }, []);
+
+  useEffect(() => {
+    if (data && data.ok) {
+      setProductData([...productData, ...data.products]);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (!isLoading) {
+      setPage((prevPage) => prevPage + 1);
+    }
+  }, [inView]);
 
   return (
     <>
       <Title pageTitle={"홈"} />
       <Layout title="홈" hasTabBar>
         <div className="flex flex-col space-y-5 overflow-y-scroll h-screen pb-36">
-          {data?.products?.map((product) => (
+          {productData.map((product) => (
             <Item
               id={product.id}
               key={product.id}
@@ -37,6 +63,7 @@ function Home() {
               createdAt={product.createdAt}
             />
           ))}
+          {data && productData.length < data?.totalCount && <div ref={ref} />}
           <FloatingButton href="/products/upload">
             <svg
               className="h-6 w-6"
