@@ -32,7 +32,7 @@ function Item({ title, price, image, hearts, id, createdAt }: ItemProps) {
         <div className="pt-2 flex flex-col justify-center">
           <h3 className="text-sm font-medium text-gray-900">{title}</h3>
           <span className="font-medium mt-1 text-gray-900">
-            {Number(price).toLocaleString()} 원
+            {Number(price).toLocaleString()}원
           </span>
           {/* <span className="text-xs mt-auto">
             {format(createdAt, "yyyy-MM-dd")}
