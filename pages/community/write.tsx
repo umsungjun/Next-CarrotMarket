@@ -36,6 +36,15 @@ const Write: NextPage = () => {
 
   return (
     <Layout canGoBack title="동네 글쓰기">
+      <div className="p-4">
+        <p>📌 동네 글쓰기 규칙</p>
+        <ul className="py-2">
+          <li>test</li>
+          <li>test</li>
+          <li>test</li>
+          <li>test</li>
+        </ul>
+      </div>
       <form className="px-4" onSubmit={handleSubmit(onValid)}>
         <TextArea
           register={register("question", { required: true, minLength: 5 })}
